@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block head %}
+Instance Info
+{% endblock %}
+{% block body %} 
+<b>instance_id</b>: {{g.instance_id}} <br/>
+<b>availability_zone</b>: {{g.availablity_zone}} <br/>
+<hr/>
+{% if messages %}
+<br />
+{% for message in messages %}
+<div class="alert alert-primary alert-dismissible" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+<small>Stress cpu:
+<a href="{{ url_for('stress', seconds=60) }}">1 min</a>,
+<a href="{{ url_for('stress', seconds=180) }}">3 min</a>,
+<a href="{{ url_for('stress', seconds=300) }}">5 min</a>
+</small>
+{% endblock %}

@@ -1,0 +1,15 @@
+[Unit]
+Description=App service
+After=network.target
+
+[Service]
+User=ec2-user
+Group=nginx
+Environment="PATH=/var/app/venv/bin:/usr/bin"
+Type=simple
+Restart=always
+WorkingDirectory=/var/app/
+ExecStart=/var/app/venv/bin/gunicorn --workers 1 --bind unix:app.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
